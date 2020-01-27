@@ -1,4 +1,4 @@
-package xyz.codevomit.sc2stats.sc2statsb;
+package xyz.codevomit.sc2stats;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

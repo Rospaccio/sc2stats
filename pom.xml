@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>xyz.codevomit.sc2stats</groupId>
 	<artifactId>sc2stats-b</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>sc2stats-b</name>
 	<description>Demo project for Spring Boot</description>
 

@@ -1,4 +1,4 @@
-package xyz.codevomit.sc2stats.sc2statsb;
+package xyz.codevomit.sc2stats;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
