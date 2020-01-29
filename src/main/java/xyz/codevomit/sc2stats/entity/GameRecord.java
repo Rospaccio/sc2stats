@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "game_record")
@@ -14,6 +15,9 @@ public class GameRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Column(name = "game_date")
+    private LocalDate gameDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Player principal;
