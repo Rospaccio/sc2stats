@@ -1,0 +1,17 @@
+.linear-background{
+    back linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,51,102,.9))
+}
+
+.sc2stats-page{
+    background-color: #002650;
+    color: white;
+    padding: 20px;
+}
+
+.nes-container.with-title > .title{
+    background-color: black;
+}
+
+.section-spaced{
+    margin: 2.5rem;
+}

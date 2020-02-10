@@ -34,6 +34,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/blog/**").permitAll()
+                .antMatchers("/index*").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").permitAll();
+    }
+
+    @Override
     public void configure(WebSecurity webSecurity) throws Exception {
         webSecurity
                 .ignoring().antMatchers("/h2-console/**");
