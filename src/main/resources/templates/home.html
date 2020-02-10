@@ -38,26 +38,56 @@
         <div th:each="player : ${userPlayers}" class="section-spaced">
             <section class="nes-container with-title">
                 <h3 class="title" th:text="${player.nickname}"></h3>
-                <div class="item" style="display: flex; flex-direction: row;">
-                    <div id="globalStats" style="flex: auto;">
+                <div class="item sc2-flex-container">
+                    <div id="globalStats" class="sc2-flex-item-auto">
                         <h4>Global</h4>
                         <div>Victories: </div>
                         <div>Defeats: </div>
                     </div>
-                    <div id="vsTerranStats" style="flex: auto;">
+                    <div id="vsTerranStats" class="sc2-flex-item-auto">
                         <h4>Vs. Terran</h4>
                         <div>Victories: </div>
                         <div>Defeats: </div>
                     </div>
-                    <div id="vsZergStats" style="flex: auto;">
+                    <div id="vsZergStats" class="sc2-flex-item-auto">
                         <h4>Vs. Zerg</h4>
                         <div>Victories: </div>
                         <div>Defeats: </div>
                     </div>
-                    <div id="vsProtossStats" style="flex: auto;">
+                    <div id="vsProtossStats" class="sc2-flex-item-auto">
                         <h4>Vs. Protoss</h4>
                         <div>Victories: </div>
                         <div>Defeats: </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Latest games</h4>
+                    <div class="item sc2-flex-container">
+                        <div class="sc2-flex-item-auto">
+                            <div>Protoss</div>
+                            <div>Terran</div>
+                            <div>Zerg</div>
+                        </div>
+                        <div class="sc2-flex-item-auto">
+                            <div><button class="nes-btn is-success"></button></div>
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-disabled"></div>
+                        </div>
+                        <div class="sc2-flex-item-auto">
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-success"></button></div>
+                        </div>
+                        <div class="sc2-flex-item-auto">
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-error"></button></div>
+                        </div>
+                        <div class="sc2-flex-item-auto">
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-disabled"></div>
+                            <div><button class="nes-btn is-success"></button></div>
+                        </div>
                     </div>
                 </div>
             </section>
