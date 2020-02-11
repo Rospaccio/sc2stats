@@ -60,34 +60,42 @@
                         <div>Defeats: </div>
                     </div>
                 </div>
-                <div>
+                <div style="margin-top: 20px;">
                     <h4>Latest games</h4>
                     <div class="item sc2-flex-container">
-                        <div class="sc2-flex-item-auto">
-                            <div>Protoss</div>
-                            <div>Terran</div>
-                            <div>Zerg</div>
+                        <div class="sc2-flex-lane-item sc2-lane-item-start">
+                            <div style="text-align: right;">Protoss</div>
+                            <div style="text-align: right;">Terran</div>
+                            <div style="text-align: right;">Zerg</div>
                         </div>
-                        <div class="sc2-flex-item-auto">
-                            <div><button class="nes-btn is-success"></button></div>
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-disabled"></div>
-                        </div>
-                        <div class="sc2-flex-item-auto">
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-success"></button></div>
-                        </div>
-                        <div class="sc2-flex-item-auto">
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-error"></button></div>
-                        </div>
-                        <div class="sc2-flex-item-auto">
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-disabled"></div>
-                            <div><button class="nes-btn is-success"></button></div>
-                        </div>
+
+<!--                        <div class="sc2-flex-lane-item" th:each="laneItem : ${laneItems}">-->
+<!--                            <div><button class="nes-btn is-success"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                        </div>-->
+
+<!--                        Graphical POC - TODO: delete-->
+<!--                        <div class="sc2-flex-lane-item">-->
+<!--                            <div><button class="nes-btn is-success"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                        </div>-->
+<!--                        <div class="sc2-flex-lane-item">-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-success"></button></div>-->
+<!--                        </div>-->
+<!--                        <div class="sc2-flex-lane-item">-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-error"></button></div>-->
+<!--                        </div>-->
+<!--                        <div class="sc2-flex-lane-item">-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
+<!--                            <div><button class="nes-btn is-success"></button></div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </section>

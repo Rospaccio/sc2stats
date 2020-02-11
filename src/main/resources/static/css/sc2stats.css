@@ -24,3 +24,11 @@
 .sc2-flex-item-auto{
     flex: auto;
 }
+
+sc2-lane-item-start{
+    margin-right: 10px;
+}
+
+sc2-flex-lane-item{
+    flex: intial;
+}
