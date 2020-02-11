@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
@@ -69,11 +69,11 @@
                             <div style="text-align: right;">Zerg</div>
                         </div>
 
-<!--                        <div class="sc2-flex-lane-item" th:each="laneItem : ${laneItems}">-->
-<!--                            <div><button class="nes-btn is-success"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                        </div>-->
+                        <div class="sc2-flex-lane-item" th:each="laneItem : ${nicknameToLane[player.nickname]}">
+                            <div><button th:class=" 'nes-btn ' + (${laneItem.protoss})"></button></div>
+                            <div><button th:class=" 'nes-btn ' + (${laneItem.terran})"></button></div>
+                            <div><button th:class=" 'nes-btn ' + (${laneItem.zerg})"></button></div>
+                        </div>
 
 <!--                        Graphical POC - TODO: delete-->
 <!--                        <div class="sc2-flex-lane-item">-->

@@ -80,8 +80,7 @@ public class GameRecordServiceTest {
         assertNotNull(saved.getId());
 
         // First of all, the game opponent should exist as a Player entity
-        Player createdOpponent = playerRepo.findByNickname("oppo")
-                .orElseThrow(() -> new RuntimeException("Opponent not found"));
+        Player createdOpponent = playerRepo.findByNickname("oppo");
 
         GameRecord found = gameRecordRepo.getOne(saved.getId());
 
