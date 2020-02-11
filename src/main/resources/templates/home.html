@@ -60,7 +60,7 @@
                         <div>Defeats: </div>
                     </div>
                 </div>
-                <div style="margin-top: 20px;">
+                <div id="latestGameLane" style="margin-top: 20px;">
                     <h4>Latest games</h4>
                     <div class="item sc2-flex-container">
                         <div class="sc2-flex-lane-item sc2-lane-item-start">
@@ -98,6 +98,13 @@
 <!--                        </div>-->
                     </div>
                 </div>
+
+                <div class="flex-container" style="margin-top: 20px">
+                    <a th:href="@{/create-game-record(nickname=${player.nickname})}">
+                        <button class="nes-btn sc2-flex-item-auto">New Game Record</button>
+                    </a>
+                </div>
+
             </section>
         </div>
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/nes.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/sc2stats.css"></link>
+    <title>Create a new game record</title>
+</head>
+<body class="sc2stats-page">
+
+    <h1>Insert a new game record</h1>
+
+    <form id="gameRecordForm" method="post" th:action="@{/create-game-record}">
+
+        <div class="nes-field is-inline">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="nes-input" placeholder="" th:value="${username}"
+                disabled>
+        </div>
+
+        <div class="nes-field is-inline">
+            <label for="nickname">Player nickname</label>
+            <input type="text" id="nickname" class="nes-input" placeholder="" th:value="${nickname}"
+                disabled>
+        </div>
+
+        <div class="nes-field is-inline">
+            <label style="white-space: nowrap;" for="playedRace">Player race</label>
+            <div class="nes-select">
+                <select name="playedRace" required id="playedRace">
+                    <option value="PROTOSS" selected>Protoss</option>
+                    <option value="TERRAN">Terran</option>
+                    <option value="ZERG">Zerg</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="nes-field is-inline">
+            <label for="opponent">Opponent</label>
+            <input type="text" id="opponent" class="nes-input" placeholder="" th:value="${opponent}"
+                   name="opponent">
+        </div>
+
+        <div class="nes-field is-inline">
+            <label style="white-space: nowrap;" for="opponentRace">Opponent Race</label>
+            <div class="nes-select">
+                <select name="opponentRace" required id="opponentRace">
+                    <option value="PROTOSS">Protoss</option>
+                    <option value="TERRAN">Terran</option>
+                    <option value="ZERG" selected>Zerg</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="sc2-flex-container" style="margin-top: 20px;">
+
+            <input type="hidden" name="outcome" id="outcome">
+
+            <div class="sc2-flex-item-auto" style="text-align: center;">
+                <button type="submit" class="nes-btn is-success" onClick="submitVictoryOutcome()">Victory!</button>
+            </div>
+
+            <div class="sc2-flex-item-auto" style="text-align: center;">
+                <button type="submit" class="nes-btn is-error" onClick="submitDefeatOutcome()">Defeat</button>
+            </div>
+
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        function submitVictoryOutcome(){
+            submitOutcome("VICTORY");
+        }
+
+        function submitDefeatOutcome(){
+            submitOutcome("DEFEAT");
+        }
+
+        function submitOutcome(outcome){
+            var submittingForm = this.document.forms.gameRecordForm;
+            submittingForm.outcome.value = outcome;
+            submittingForm.submit();
+        }
+    </script>
+
+</body>
+</html>

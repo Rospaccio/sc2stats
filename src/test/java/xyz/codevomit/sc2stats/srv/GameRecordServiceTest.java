@@ -15,6 +15,8 @@ import xyz.codevomit.sc2stats.stats.repo.GameRecordRepository;
 import xyz.codevomit.sc2stats.stats.repo.PlayerRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,10 +47,10 @@ public class GameRecordServiceTest {
 
         playerRepo.save(principal);
 
-        Player opponent = new Player();
-        opponent.setNickname(OPPONENT);
-
-        playerRepo.save(opponent);
+//        Player opponent = new Player();
+//        opponent.setNickname(OPPONENT);
+//
+//        playerRepo.save(opponent);
     }
 
     @AfterEach
@@ -69,11 +71,17 @@ public class GameRecordServiceTest {
         record.setOpponentRace(StarcraftRace.ZERG);
         record.setOutcome(GameOutcome.VICTORY);
         record.setPlayedRace(StarcraftRace.PROTOSS);
-        record.setGameDate(LocalDate.now());
+        record.setGameDateTime(LocalDateTime.now());
 
-        GameRecord saved = gameRecordSrv.create(record, USERNAME, principalNickname, opponentNickname);
+        GameRecord saved = gameRecordSrv.create(USERNAME, principalNickname, StarcraftRace.PROTOSS,
+                opponentNickname, StarcraftRace.ZERG,
+                GameOutcome.VICTORY);
 
         assertNotNull(saved.getId());
+
+        // First of all, the game opponent should exist as a Player entity
+        Player createdOpponent = playerRepo.findByNickname("oppo")
+                .orElseThrow(() -> new RuntimeException("Opponent not found"));
 
         GameRecord found = gameRecordRepo.getOne(saved.getId());
 
