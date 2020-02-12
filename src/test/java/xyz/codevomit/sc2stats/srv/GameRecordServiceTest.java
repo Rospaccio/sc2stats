@@ -46,15 +46,11 @@ public class GameRecordServiceTest {
         principal.setUsername(USERNAME);
 
         playerRepo.save(principal);
-
-//        Player opponent = new Player();
-//        opponent.setNickname(OPPONENT);
-//
-//        playerRepo.save(opponent);
     }
 
     @AfterEach
     public void clear(){
+
         playerRepo.deleteAll();
     }
 

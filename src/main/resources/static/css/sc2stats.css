@@ -36,3 +36,7 @@ sc2-flex-lane-item{
 sc2-select-label{
     white-space: nowrap;
 }
+
+sc2-field-select{
+    margin-left: 80px;
+}
