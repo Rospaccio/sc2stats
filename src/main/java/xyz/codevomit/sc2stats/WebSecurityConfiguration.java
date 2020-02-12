@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +35,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .roles("USER", "ADMIN");
     }
 
+    @Bean
+    public AuthenticationSuccessHandler loginHandler(){
+        return new SimpleUrlAuthenticationSuccessHandler("/home");
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -45,7 +52,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/blog/**").permitAll()
                 .antMatchers("/index*").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll();
+                .and().formLogin().loginPage("/login").successHandler(loginHandler()).permitAll();
     }
 
     @Override
