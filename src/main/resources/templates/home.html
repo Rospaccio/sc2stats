@@ -6,143 +6,168 @@
     <link rel="stylesheet" type="text/css" href="css/nes.css"></link>
     <link rel="stylesheet" type="text/css" href="css/sc2stats.css"></link>
     <title>Home page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </head>
 <body class="sc2stats-page">
-    <h1>SC2Stats Personal Dashboard</h1>
+<h1>SC2Stats Personal Dashboard</h1>
 
-    <div id="noPlayersSection" th:if="${ #lists.isEmpty(userPlayers)}">
+<div id="noPlayersSection" th:if="${ #lists.isEmpty(userPlayers)}">
 
-        <section class="nes-container with-title">
-            <h3 class="title">Info</h3>
-            <div>
+    <section class="nes-container with-title">
+        <h3 class="title">Info</h3>
+        <div>
                 <span class="nes-text is-primary">
                     Hi <span th:text="${username}"></span>! You do not have any player yet.
                 </span>
-            </div>
-            <div>
-                <a th:href="@{/create-player}">
-                    <button class="nes-btn is-primary" role="link">Create your first player!</button>
-                </a>
-            </div>
-        </section>
-    </div>
+        </div>
+        <div>
+            <a th:href="@{/create-player}">
+                <button class="nes-btn is-primary" role="link">Create your first player!</button>
+            </a>
+        </div>
+    </section>
+</div>
 
-    <div id="atLeastOnePlayerSection" th:if="${ ! (#lists.isEmpty(userPlayers)) }">
+<div id="atLeastOnePlayerSection" th:if="${ ! (#lists.isEmpty(userPlayers)) }">
 
-        <h2>Your Players</h2>
+    <h2>Your Players</h2>
 
-        <a th:href="@{/create-player}">
-            <button class="nes-btn is-primary" role="link">New Player</button>
-        </a>
+    <a th:href="@{/create-player}">
+        <button class="nes-btn is-primary" role="link">New Player</button>
+    </a>
 
-        <div th:each="player : ${userPlayers}" class="section-spaced">
-            <section class="nes-container with-title">
-                <h3 class="title" th:text="${player.nickname}"></h3>
-                <div class="item sc2-flex-container">
-                    <div id="globalStats" class="sc2-flex-item-auto">
-                        <h4>Global</h4>
-                        <div>Victories:
-                            <span th:text="${stats[player.nickname]['global'].victoryCount}"></span>
-                            (<span th:text="${ #numbers.formatDecimal(
+    <div th:each="player : ${userPlayers}" class="section-spaced">
+        <section class="nes-container with-title">
+            <h3 class="title" th:text="${player.nickname}"></h3>
+            <div class="item sc2-flex-container">
+                <div id="globalStats" class="sc2-flex-item-auto">
+                    <h4>Global</h4>
+                    <div>Victories:
+                        <span th:text="${stats[player.nickname]['global'].victoryCount}"></span>
+                        (<span th:text="${ #numbers.formatDecimal(
                                 stats[player.nickname]['global'].winRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
-                        <div>Defeats:
-                            <span th:text="${stats[player.nickname]['global'].defeatCount}"></span>
-                            (<span th:text="${#numbers.formatDecimal(
+                    </div>
+                    <div>Defeats:
+                        <span th:text="${stats[player.nickname]['global'].defeatCount}"></span>
+                        (<span th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['global'].lossRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
                     </div>
-                    <div id="vsTerranStats" class="sc2-flex-item-auto">
-                        <h4>Vs. Terran</h4>
-                        <div>Victories: <span th:text="${stats[player.nickname]['vsTerran'].victoryCount}"></span>
-                            (<span th:text="${ #numbers.formatDecimal(
+
+                    <canvas id="myChart" style="width: 300px; height: 300px;"></canvas>
+
+                    <script type="text/javascript">
+                            var ctx = document.getElementById('myChart').getContext("2d");
+                            var myChart = new Chart(ctx,
+                            {
+                                type: 'pie',
+                                data: {
+                                    datasets: [{
+                                        data: [10, 20, 30]
+                                    }]
+                                },
+                                options: {}
+                            });
+                    </script>
+
+                </div>
+                <div id="vsTerranStats" class="sc2-flex-item-auto">
+                    <h4>Vs. Terran</h4>
+                    <div>Victories: <span th:text="${stats[player.nickname]['vsTerran'].victoryCount}"></span>
+                        (<span th:text="${ #numbers.formatDecimal(
                                 stats[player.nickname]['vsTerran'].winRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
-                        <div>Defeats: <span th:text="${stats[player.nickname]['vsTerran'].defeatCount}"></span>
-                            (<span th:text="${#numbers.formatDecimal(
+                    </div>
+                    <div>Defeats: <span th:text="${stats[player.nickname]['vsTerran'].defeatCount}"></span>
+                        (<span th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['vsTerran'].lossRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
                     </div>
-                    <div id="vsZergStats" class="sc2-flex-item-auto">
-                        <h4>Vs. Zerg</h4>
-                        <div>Victories: <span th:text="${stats[player.nickname]['vsZerg'].victoryCount}"></span>
-                            (<span th:text="${ #numbers.formatDecimal(
+                </div>
+                <div id="vsZergStats" class="sc2-flex-item-auto">
+                    <h4>Vs. Zerg</h4>
+                    <div>Victories: <span th:text="${stats[player.nickname]['vsZerg'].victoryCount}"></span>
+                        (<span th:text="${ #numbers.formatDecimal(
                                 stats[player.nickname]['vsZerg'].winRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
-                        <div>Defeats: <span th:text="${stats[player.nickname]['vsZerg'].defeatCount}"></span>
-                            (<span th:text="${#numbers.formatDecimal(
+                    </div>
+                    <div>Defeats: <span th:text="${stats[player.nickname]['vsZerg'].defeatCount}"></span>
+                        (<span th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['vsZerg'].lossRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
                     </div>
-                    <div id="vsProtossStats" class="sc2-flex-item-auto">
-                        <h4>Vs. Protoss</h4>
-                        <div>Victories: <span th:text="${stats[player.nickname]['vsProtoss'].victoryCount}"></span>
-                            (<span th:text="${ #numbers.formatDecimal(
+                </div>
+                <div id="vsProtossStats" class="sc2-flex-item-auto">
+                    <h4>Vs. Protoss</h4>
+                    <div>Victories: <span th:text="${stats[player.nickname]['vsProtoss'].victoryCount}"></span>
+                        (<span th:text="${ #numbers.formatDecimal(
                                 stats[player.nickname]['vsProtoss'].winRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
-                        </div>
-                        <div>Defeats: <span th:text="${stats[player.nickname]['vsProtoss'].defeatCount}"></span>
-                            (<span th:text="${#numbers.formatDecimal(
+                    </div>
+                    <div>Defeats: <span th:text="${stats[player.nickname]['vsProtoss'].defeatCount}"></span>
+                        (<span th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['vsProtoss'].lossRate,
                                 1,
                                 2,
                                 'POINT')}"></span>)
+                    </div>
+                </div>
+            </div>
+            <div id="latestGameLane" style="margin-top: 20px;">
+                <h4>Latest games</h4>
+                <div class="item sc2-flex-container">
+                    <div class="sc2-flex-lane-item sc2-lane-item-start">
+                        <div style="text-align: right;">Protoss</div>
+                        <div style="text-align: right;">Terran</div>
+                        <div style="text-align: right;">Zerg</div>
+                    </div>
+
+                    <div class="sc2-flex-lane-item" th:each="laneItem : ${nicknameToLane[player.nickname]}">
+                        <div>
+                            <button th:class=" 'nes-btn ' + (${laneItem.protoss})"></button>
+                        </div>
+                        <div>
+                            <button th:class=" 'nes-btn ' + (${laneItem.terran})"></button>
+                        </div>
+                        <div>
+                            <button th:class=" 'nes-btn ' + (${laneItem.zerg})"></button>
                         </div>
                     </div>
                 </div>
-                <div id="latestGameLane" style="margin-top: 20px;">
-                    <h4>Latest games</h4>
-                    <div class="item sc2-flex-container">
-                        <div class="sc2-flex-lane-item sc2-lane-item-start">
-                            <div style="text-align: right;">Protoss</div>
-                            <div style="text-align: right;">Terran</div>
-                            <div style="text-align: right;">Zerg</div>
-                        </div>
+            </div>
 
-                        <div class="sc2-flex-lane-item" th:each="laneItem : ${nicknameToLane[player.nickname]}">
-                            <div><button th:class=" 'nes-btn ' + (${laneItem.protoss})"></button></div>
-                            <div><button th:class=" 'nes-btn ' + (${laneItem.terran})"></button></div>
-                            <div><button th:class=" 'nes-btn ' + (${laneItem.zerg})"></button></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex-container" style="margin-top: 20px">
+                <a th:href="@{/create-game-record(nickname=${player.nickname})}">
+                    <button class="nes-btn sc2-flex-item-auto">New Game Record</button>
+                </a>
+            </div>
 
-                <div class="flex-container" style="margin-top: 20px">
-                    <a th:href="@{/create-game-record(nickname=${player.nickname})}">
-                        <button class="nes-btn sc2-flex-item-auto">New Game Record</button>
-                    </a>
-                </div>
-
-            </section>
-        </div>
-
+        </section>
     </div>
 
-    <script type="text/javascript">
+</div>
+
+<script type="text/javascript">
         function overGameButton(){
 
         }
-    </script>
+
+</script>
 
 </body>
 </html>
