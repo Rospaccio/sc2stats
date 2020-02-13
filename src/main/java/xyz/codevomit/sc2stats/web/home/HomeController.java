@@ -64,9 +64,9 @@ public class HomeController {
 
             Map<String, AggregateStatistics> forPlayerAndRace = new HashMap<>();
             forPlayerAndRace.put("global", statsService.findGlobalStats(username(), aPlayer.getNickname()));
-//            forPlayerAndRace.put("vsTerran", statsService.findStatsVsRace(username(), aPlayer.getNickname(), StarcraftRace.TERRAN);
-//            forPlayerAndRace.put("vsTerran", statsService.findStatsVsRace(username(), aPlayer.getNickname(), StarcraftRace.ZERG);
-//            forPlayerAndRace.put("vsTerran", statsService.findStatsVsRace(username(), aPlayer.getNickname(), StarcraftRace.PROTOSS);
+            forPlayerAndRace.put("vsTerran", statsService.findStatsVsRace(username(), aPlayer.getNickname(), StarcraftRace.TERRAN));
+            forPlayerAndRace.put("vsZerg", statsService.findStatsVsRace(username(), aPlayer.getNickname(), StarcraftRace.ZERG));
+            forPlayerAndRace.put("vsProtoss", statsService.findStatsVsRace(username(), aPlayer.getNickname(), StarcraftRace.PROTOSS));
 
             nicknameToStatsMap.put(aPlayer.getNickname(), forPlayerAndRace);
         }

@@ -60,18 +60,54 @@
                     </div>
                     <div id="vsTerranStats" class="sc2-flex-item-auto">
                         <h4>Vs. Terran</h4>
-                        <div>Victories: </div>
-                        <div>Defeats: </div>
+                        <div>Victories: <span th:text="${stats[player.nickname]['vsTerran'].victoryCount}"></span>
+                            (<span th:text="${ #numbers.formatDecimal(
+                                stats[player.nickname]['vsTerran'].winRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
+                        <div>Defeats: <span th:text="${stats[player.nickname]['vsTerran'].defeatCount}"></span>
+                            (<span th:text="${#numbers.formatDecimal(
+                                stats[player.nickname]['vsTerran'].lossRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
                     </div>
                     <div id="vsZergStats" class="sc2-flex-item-auto">
                         <h4>Vs. Zerg</h4>
-                        <div>Victories: </div>
-                        <div>Defeats: </div>
+                        <div>Victories: <span th:text="${stats[player.nickname]['vsZerg'].victoryCount}"></span>
+                            (<span th:text="${ #numbers.formatDecimal(
+                                stats[player.nickname]['vsZerg'].winRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
+                        <div>Defeats: <span th:text="${stats[player.nickname]['vsZerg'].defeatCount}"></span>
+                            (<span th:text="${#numbers.formatDecimal(
+                                stats[player.nickname]['vsZerg'].lossRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
                     </div>
                     <div id="vsProtossStats" class="sc2-flex-item-auto">
                         <h4>Vs. Protoss</h4>
-                        <div>Victories: </div>
-                        <div>Defeats: </div>
+                        <div>Victories: <span th:text="${stats[player.nickname]['vsProtoss'].victoryCount}"></span>
+                            (<span th:text="${ #numbers.formatDecimal(
+                                stats[player.nickname]['vsProtoss'].winRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
+                        <div>Defeats: <span th:text="${stats[player.nickname]['vsProtoss'].defeatCount}"></span>
+                            (<span th:text="${#numbers.formatDecimal(
+                                stats[player.nickname]['vsProtoss'].lossRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
                     </div>
                 </div>
                 <div id="latestGameLane" style="margin-top: 20px;">
@@ -88,28 +124,6 @@
                             <div><button th:class=" 'nes-btn ' + (${laneItem.terran})"></button></div>
                             <div><button th:class=" 'nes-btn ' + (${laneItem.zerg})"></button></div>
                         </div>
-
-<!--                        Graphical POC - TODO: delete-->
-<!--                        <div class="sc2-flex-lane-item">-->
-<!--                            <div><button class="nes-btn is-success"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                        </div>-->
-<!--                        <div class="sc2-flex-lane-item">-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-success"></button></div>-->
-<!--                        </div>-->
-<!--                        <div class="sc2-flex-lane-item">-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-error"></button></div>-->
-<!--                        </div>-->
-<!--                        <div class="sc2-flex-lane-item">-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-disabled"></button></div>-->
-<!--                            <div><button class="nes-btn is-success"></button></div>-->
-<!--                        </div>-->
                     </div>
                 </div>
 
@@ -123,6 +137,12 @@
         </div>
 
     </div>
+
+    <script type="text/javascript">
+        function overGameButton(){
+
+        }
+    </script>
 
 </body>
 </html>

@@ -26,18 +26,26 @@
     flex: auto;
 }
 
-sc2-lane-item-start{
+.sc2-lane-item-start{
     margin-right: 10px;
 }
 
-sc2-flex-lane-item{
+.sc2-flex-lane-item{
     flex: intial;
 }
 
-sc2-select-label{
+.sc2-flex-initial{
+    flex: initial;
+}
+
+.sc2-select-label{
     white-space: nowrap;
 }
 
-sc2-field-select{
+.sc2-field-select{
     margin-left: 80px;
+}
+
+.sc2-info-section{
+    margin: 30px;
 }

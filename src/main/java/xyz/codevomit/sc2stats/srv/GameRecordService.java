@@ -65,12 +65,6 @@ public class GameRecordService {
         Player savedOpponent = playerRepo.save(theNewOpponent);
         return savedOpponent;
     }
-//
-//    public static final String FIND_LATEST = "select gr from GameRecord gr" +
-//            "   inner join gr.principal as p " +
-//            "   inner join gr.opponent as o " +
-//            "       where p.username = :username " +
-//            "           and ";
 
     public Map<String, List<GameLaneItem>> findLatestGame(String username, int count) {
 
