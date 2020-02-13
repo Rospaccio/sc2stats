@@ -86,7 +86,7 @@ public class StatisticsServiceTest {
         assertEquals(1, global.getVictoryCount());
         assertEquals(1, global.getDefeatCount());
 
-        double winRate = global.winRate();
+        double winRate = global.getWinRate();
 
         assertEquals(.5, winRate, 0.001);
 

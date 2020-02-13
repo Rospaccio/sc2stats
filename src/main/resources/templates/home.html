@@ -41,8 +41,22 @@
                 <div class="item sc2-flex-container">
                     <div id="globalStats" class="sc2-flex-item-auto">
                         <h4>Global</h4>
-                        <div>Victories: </div>
-                        <div>Defeats: </div>
+                        <div>Victories:
+                            <span th:text="${stats[player.nickname]['global'].victoryCount}"></span>
+                            (<span th:text="${ #numbers.formatDecimal(
+                                stats[player.nickname]['global'].winRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
+                        <div>Defeats:
+                            <span th:text="${stats[player.nickname]['global'].defeatCount}"></span>
+                            (<span th:text="${#numbers.formatDecimal(
+                                stats[player.nickname]['global'].lossRate,
+                                1,
+                                2,
+                                'POINT')}"></span>)
+                        </div>
                     </div>
                     <div id="vsTerranStats" class="sc2-flex-item-auto">
                         <h4>Vs. Terran</h4>

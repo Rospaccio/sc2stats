@@ -8,12 +8,12 @@ public class AggregateStatistics {
     int victoryCount;
     int defeatCount;
 
-    public double winRate(){
+    public double getWinRate(){
 
         return  (double)victoryCount / sum();
     }
 
-    public double lossRate(){
+    public double getLossRate(){
 
         return (double)defeatCount / sum();
     }
