@@ -10,11 +10,17 @@ public class AggregateStatistics {
 
     public double getWinRate(){
 
+        if(sum() == 0){
+            return 0.0;
+        }
         return  (double)victoryCount / sum();
     }
 
     public double getLossRate(){
 
+        if(sum() == 0) {
+            return 0.0;
+        }
         return (double)defeatCount / sum();
     }
 
