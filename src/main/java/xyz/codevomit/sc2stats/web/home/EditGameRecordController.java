@@ -1,5 +1,6 @@
 package xyz.codevomit.sc2stats.web.home;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import xyz.codevomit.sc2stats.stats.repo.GameRecordRepository;
 
 import java.util.Optional;
 
+@Slf4j
 @Controller
 public class EditGameRecordController {
 
@@ -35,8 +37,11 @@ public class EditGameRecordController {
     }
 
     @PostMapping("/edit-game-record")
-    public RedirectView save(){
+    public RedirectView save(@ModelAttribute("gameRecord") GameRecord gameRecord){
 
+        log.info("The GameRecord: {}", gameRecord);
+
+        gameRecordRepo.save(gameRecord);
 
         return new RedirectView("/home");
     }
