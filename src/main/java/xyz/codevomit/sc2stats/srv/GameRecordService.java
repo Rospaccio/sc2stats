@@ -1,5 +1,6 @@
 package xyz.codevomit.sc2stats.srv;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 import xyz.codevomit.sc2stats.entity.GameOutcome;
 import xyz.codevomit.sc2stats.entity.GameRecord;
@@ -30,6 +31,7 @@ public class GameRecordService {
     }
 
     public GameRecord create(String username, String principalNickname, StarcraftRace principalRace,
+                             LocalDateTime datetimeOfGame,
                              String opponentNickname, StarcraftRace opponentRace,
                              GameOutcome gameOutcome) {
 
@@ -44,7 +46,7 @@ public class GameRecordService {
         }
 
         GameRecord gameRecord = new GameRecord();
-        gameRecord.setGameDateTime(LocalDateTime.now());
+        gameRecord.setGameDateTime(datetimeOfGame);
         gameRecord.setPrincipal(principalPlayer);
         gameRecord.setPlayedRace(principalRace);
         gameRecord.setOpponent(existingOpponent);

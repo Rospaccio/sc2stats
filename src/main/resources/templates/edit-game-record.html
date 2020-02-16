@@ -14,6 +14,8 @@
     <form id="gameRecordForm" method="post" th:action="@{/edit-game-record}"
         th:object="${gameRecord}">
 
+        <input type="hidden" id="gameRecordId" name="gameRecordId" th:value="*{id}">
+
         <div class="nes-field is-inline">
             <label for="username">Username</label>
             <input type="text" id="username" class="nes-input" placeholder="" th:value="*{principal.username}"
@@ -24,6 +26,12 @@
             <label for="nickname">Player nickname</label>
             <input type="text" id="nickname" class="nes-input" placeholder="" th:value="*{principal.nickname}"
                 disabled>
+        </div>
+
+        <div class="nes-field is-inline">
+            <label for="datetime">Date and time</label>
+            <input type="datetime-local" id="datetime" class="nes-input" placeholder="" th:value="*{gameDateTime}"
+                   name="datetime">
         </div>
 
         <div class="nes-field is-inline">

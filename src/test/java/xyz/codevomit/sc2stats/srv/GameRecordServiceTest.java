@@ -70,6 +70,7 @@ public class GameRecordServiceTest {
         record.setGameDateTime(LocalDateTime.now());
 
         GameRecord saved = gameRecordSrv.create(USERNAME, principalNickname, StarcraftRace.PROTOSS,
+                LocalDateTime.now(),
                 opponentNickname, StarcraftRace.ZERG,
                 GameOutcome.VICTORY);
 
