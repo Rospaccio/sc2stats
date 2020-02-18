@@ -37,10 +37,10 @@
         <div class="nes-field is-inline">
             <label style="white-space: nowrap;" for="playedRace">Player race</label>
             <div class="nes-select">
-                <select name="playedRace" required id="playedRace">
-                    <option value="PROTOSS" selected>Protoss</option>
+                <select th:field=*{playedRace} name="playedRace" required id="playedRace">
                     <option value="TERRAN">Terran</option>
                     <option value="ZERG">Zerg</option>
+                    <option value="PROTOSS" selected>Protoss</option>
                 </select>
             </div>
         </div>
@@ -54,10 +54,10 @@
         <div class="nes-field is-inline">
             <label style="white-space: nowrap;" for="opponentRace">Opponent Race</label>
             <div class="nes-select">
-                <select name="opponentRace" required id="opponentRace">
-                    <option value="PROTOSS">Protoss</option>
+                <select th:field="*{opponentRace}" name="opponentRace" required id="opponentRace">
                     <option value="TERRAN">Terran</option>
                     <option value="ZERG" selected>Zerg</option>
+                    <option value="PROTOSS">Protoss</option>
                 </select>
             </div>
         </div>

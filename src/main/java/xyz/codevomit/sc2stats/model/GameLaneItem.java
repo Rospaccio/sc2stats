@@ -5,31 +5,29 @@ import xyz.codevomit.sc2stats.entity.GameOutcome;
 import xyz.codevomit.sc2stats.entity.GameRecord;
 import xyz.codevomit.sc2stats.entity.StarcraftRace;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Data
 public class GameLaneItem {
 
     GameRecord gameRecord;
-
-    String protoss;
-    String terran;
-    String zerg;
+    Map<StarcraftRace, GameLaneCell> cells = new HashMap<>(3);
 
     public GameLaneItem(GameRecord record){
 
         this.gameRecord = record;
 
-        String cssClass = "";
+        for(StarcraftRace race : StarcraftRace.values()){
 
-        if(record.getOutcome() == GameOutcome.VICTORY) {
-            cssClass = "is-success";
+            GameLaneCell cell = new GameLaneCell();
+
+            cell.victory = gameRecord.getOpponentRace() == race
+                    && gameRecord.getOutcome() == GameOutcome.VICTORY;
+
+            cell.disabled = gameRecord.getOpponentRace() != race;
+
+            cells.put(race, cell);
         }
-        else{
-            cssClass = "is-error";
-        }
-
-        protoss = record.getOpponentRace() == StarcraftRace.PROTOSS ? cssClass : "is-disabled";
-        terran = record.getOpponentRace() == StarcraftRace.TERRAN ? cssClass : "is-disabled";
-        zerg = record.getOpponentRace() == StarcraftRace.ZERG ? cssClass : "is-disabled";
-
     }
 }

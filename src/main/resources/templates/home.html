@@ -52,28 +52,30 @@
                     </div>
                     <div>Defeats:
                         <span th:text="${stats[player.nickname]['global'].defeatCount}"></span>
-                        (<spanaggre th:text="${#numbers.formatDecimal(
+                        (
+                        <spanaggre th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['global'].lossRate,
                                 1,
                                 2,
-                                'POINT')}"></spanaggre>)
+                                'POINT')}"></spanaggre>
+                        )
                     </div>
 
-<!--                    <canvas id="myChart" style="width: 300px; height: 300px;"></canvas>-->
+                    <!--                    <canvas id="myChart" style="width: 300px; height: 300px;"></canvas>-->
 
-<!--                    <script type="text/javascript">-->
-<!--                            var ctx = document.getElementById('myChart').getContext("2d");-->
-<!--                            var myChart = new Chart(ctx,-->
-<!--                            {-->
-<!--                                type: 'pie',-->
-<!--                                data: {-->
-<!--                                    datasets: [{-->
-<!--                                        data: [10, 20, 30]-->
-<!--                                    }]-->
-<!--                                },-->
-<!--                                options: {}-->
-<!--                            });-->
-<!--                    </script>-->
+                    <!--                    <script type="text/javascript">-->
+                    <!--                            var ctx = document.getElementById('myChart').getContext("2d");-->
+                    <!--                            var myChart = new Chart(ctx,-->
+                    <!--                            {-->
+                    <!--                                type: 'pie',-->
+                    <!--                                data: {-->
+                    <!--                                    datasets: [{-->
+                    <!--                                        data: [10, 20, 30]-->
+                    <!--                                    }]-->
+                    <!--                                },-->
+                    <!--                                options: {}-->
+                    <!--                            });-->
+                    <!--                    </script>-->
 
                 </div>
                 <div id="vsTerranStats" class="sc2-flex-item-auto">
@@ -132,25 +134,31 @@
                 <h4>Latest games</h4>
                 <div class="item sc2-flex-container">
                     <div class="sc2-flex-lane-item sc2-lane-item-start">
-                        <div style="text-align: right;">Protoss</div>
                         <div style="text-align: right;">Terran</div>
                         <div style="text-align: right;">Zerg</div>
+                        <div style="text-align: right;">Protoss</div>
                     </div>
 
                     <div class="sc2-flex-lane-item" th:each="laneItem : ${nicknameToLane[player.nickname]}">
                         <div>
+                            <button class="nes-btn is-disabled" th:if="${laneItem.cells['TERRAN'].disabled}"></button>
                             <a th:href="@{edit-game-record(gameRecordId=${laneItem.gameRecord.id})}">
-                                <button th:class=" 'nes-btn ' + (${laneItem.protoss})"></button>
+                                <button class="nes-btn" th:if="${ ! laneItem.cells['TERRAN'].disabled}"
+                                        th:classappend="${laneItem.cells['TERRAN'].victory ? 'is-success' : 'is-error'}"></button>
                             </a>
                         </div>
                         <div>
+                            <button class="nes-btn is-disabled" th:if="${laneItem.cells['ZERG'].disabled}"></button>
                             <a th:href="@{edit-game-record(gameRecordId=${laneItem.gameRecord.id})}">
-                                <button th:class=" 'nes-btn ' + (${laneItem.terran})"></button>
+                                <button class="nes-btn" th:if="${ ! laneItem.cells['ZERG'].disabled}"
+                                        th:classappend="${laneItem.cells['ZERG'].victory ? 'is-success' : 'is-error'}"></button>
                             </a>
                         </div>
                         <div>
+                            <button class="nes-btn is-disabled" th:if="${laneItem.cells['PROTOSS'].disabled}"></button>
                             <a th:href="@{edit-game-record(gameRecordId=${laneItem.gameRecord.id})}">
-                                <button th:class=" 'nes-btn ' + (${laneItem.zerg})"></button>
+                                <button class="nes-btn" th:if="${ ! laneItem.cells['PROTOSS'].disabled}"
+                                        th:classappend="${laneItem.cells['PROTOSS'].victory ? 'is-success' : 'is-error'}"></button>
                             </a>
                         </div>
                     </div>
@@ -172,6 +180,8 @@
         function overGameButton(){
 
         }
+
+
 
 </script>
 
