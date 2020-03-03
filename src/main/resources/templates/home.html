@@ -53,11 +53,11 @@
                     <div>Defeats:
                         <span th:text="${stats[player.nickname]['global'].defeatCount}"></span>
                         (
-                        <spanaggre th:text="${#numbers.formatDecimal(
+                        <span th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['global'].lossRate,
                                 1,
                                 2,
-                                'POINT')}"></spanaggre>
+                                'POINT')}"></span>
                         )
                     </div>
 

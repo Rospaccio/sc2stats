@@ -9,72 +9,87 @@
 </head>
 <body class="sc2stats-page">
 
-    <h1>Edit game record</h1>
+<h1>Edit game record</h1>
 
-    <form id="gameRecordForm" method="post" th:action="@{/edit-game-record}"
-        th:object="${gameRecord}">
+<form id="gameRecordForm" method="post" th:action="@{/edit-game-record}"
+      th:object="${gameRecord}">
 
-        <input type="hidden" id="gameRecordId" name="gameRecordId" th:value="*{id}">
+    <input type="hidden" id="gameRecordId" name="gameRecordId" th:value="*{id}">
 
-        <div class="nes-field is-inline">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="nes-input" placeholder="" th:value="*{principal.username}"
-                disabled>
+    <div class="nes-field is-inline">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="nes-input" placeholder="" th:value="*{principal.username}"
+               disabled>
+    </div>
+
+    <div class="nes-field is-inline">
+        <label for="nickname">Player nickname</label>
+        <input type="text" id="nickname" class="nes-input" placeholder="" th:value="*{principal.nickname}"
+               disabled>
+    </div>
+
+    <div class="nes-field is-inline">
+        <label for="datetime">Date and time</label>
+        <input type="datetime-local" id="datetime" class="nes-input" placeholder="" th:value="*{gameDateTime}"
+               name="datetime">
+    </div>
+
+    <div class="nes-field is-inline">
+        <label style="white-space: nowrap;" for="playedRace">Player race</label>
+        <div class="nes-select sc2-select">
+            <select th:field=*{playedRace} name="playedRace" required id="playedRace">
+                <option value="TERRAN">Terran</option>
+                <option value="ZERG">Zerg</option>
+                <option value="PROTOSS" selected>Protoss</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="nes-field is-inline">
+        <label for="opponent">Opponent</label>
+        <input type="text" id="opponent" class="nes-input" placeholder="" th:value="*{opponent.nickname}"
+               name="opponent.nickname">
+    </div>
+
+    <div class="nes-field is-inline">
+        <label style="white-space: nowrap;" for="opponentRace">Opponent Race</label>
+        <div class="nes-select sc2-select">
+            <select th:field="*{opponentRace}" name="opponentRace" required id="opponentRace">
+                <option value="TERRAN">Terran</option>
+                <option value="ZERG" selected>Zerg</option>
+                <option value="PROTOSS">Protoss</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="sc2-flex-container nes-field" style="margin-top: 20px;">
+        <div class="sc2-flex-item-auto" style="text-align: center;">
+            <label>
+                <input type="radio" class="nes-radio is-dark" name="answer" checked/>
+                <span style="color: green;">Victory</span>
+            </label>
+        </div>
+        <div class="sc2-flex-item-auto" style="text-align: center;">
+            <label>
+                <input type="radio" class="nes-radio is-dark" name="answer"/>
+                <span style="color: red;">Defeat</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="sc2-flex-container" style="margin-top: 20px;">
+
+        <input type="hidden" name="outcome" id="outcome">
+
+        <div class="sc2-flex-item-auto" style="text-align: center;">
+            <input type="submit" class="nes-btn is-primary" value="Save"></input>
         </div>
 
-        <div class="nes-field is-inline">
-            <label for="nickname">Player nickname</label>
-            <input type="text" id="nickname" class="nes-input" placeholder="" th:value="*{principal.nickname}"
-                disabled>
-        </div>
+    </div>
 
-        <div class="nes-field is-inline">
-            <label for="datetime">Date and time</label>
-            <input type="datetime-local" id="datetime" class="nes-input" placeholder="" th:value="*{gameDateTime}"
-                   name="datetime">
-        </div>
+</form>
 
-        <div class="nes-field is-inline">
-            <label style="white-space: nowrap;" for="playedRace">Player race</label>
-            <div class="nes-select">
-                <select th:field=*{playedRace} name="playedRace" required id="playedRace">
-                    <option value="TERRAN">Terran</option>
-                    <option value="ZERG">Zerg</option>
-                    <option value="PROTOSS" selected>Protoss</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="nes-field is-inline">
-            <label for="opponent">Opponent</label>
-            <input type="text" id="opponent" class="nes-input" placeholder="" th:value="*{opponent.nickname}"
-                   name="opponent.nickname">
-        </div>
-
-        <div class="nes-field is-inline">
-            <label style="white-space: nowrap;" for="opponentRace">Opponent Race</label>
-            <div class="nes-select">
-                <select th:field="*{opponentRace}" name="opponentRace" required id="opponentRace">
-                    <option value="TERRAN">Terran</option>
-                    <option value="ZERG" selected>Zerg</option>
-                    <option value="PROTOSS">Protoss</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="sc2-flex-container" style="margin-top: 20px;">
-
-            <input type="hidden" name="outcome" id="outcome">
-
-            <div class="sc2-flex-item-auto" style="text-align: center;">
-                <input type="submit" class="nes-btn is-primary" value="Save"></input>
-            </div>
-
-        </div>
-
-    </form>
-
-    <script type="text/javascript">
+<script type="text/javascript">
         function submitVictoryOutcome(){
             submitOutcome("VICTORY");
         }
@@ -88,7 +103,8 @@
             submittingForm.outcome.value = outcome;
             submittingForm.submit();
         }
-    </script>
+
+</script>
 
 </body>
 </html>

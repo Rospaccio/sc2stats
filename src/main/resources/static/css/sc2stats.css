@@ -49,3 +49,8 @@
 .sc2-info-section{
     margin: 30px;
 }
+
+.sc2-select{
+    flex-basis: 0;
+    flex-grow: 5;
+}
