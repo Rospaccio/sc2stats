@@ -6,7 +6,12 @@
     <link rel="stylesheet" type="text/css" href="css/nes.css"></link>
     <link rel="stylesheet" type="text/css" href="css/sc2stats.css"></link>
     <title>Home page</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
 </head>
 <body class="sc2stats-page">
 <h1>SC2Stats Personal Dashboard</h1>
@@ -52,31 +57,12 @@
                     </div>
                     <div>Defeats:
                         <span th:text="${stats[player.nickname]['global'].defeatCount}"></span>
-                        (
-                        <span th:text="${#numbers.formatDecimal(
+                        (<span th:text="${#numbers.formatDecimal(
                                 stats[player.nickname]['global'].lossRate,
                                 1,
                                 2,
-                                'POINT')}"></span>
-                        )
+                                'POINT')}"></span>)
                     </div>
-
-                    <!--                    <canvas id="myChart" style="width: 300px; height: 300px;"></canvas>-->
-
-                    <!--                    <script type="text/javascript">-->
-                    <!--                            var ctx = document.getElementById('myChart').getContext("2d");-->
-                    <!--                            var myChart = new Chart(ctx,-->
-                    <!--                            {-->
-                    <!--                                type: 'pie',-->
-                    <!--                                data: {-->
-                    <!--                                    datasets: [{-->
-                    <!--                                        data: [10, 20, 30]-->
-                    <!--                                    }]-->
-                    <!--                                },-->
-                    <!--                                options: {}-->
-                    <!--                            });-->
-                    <!--                    </script>-->
-
                 </div>
                 <div id="vsTerranStats" class="sc2-flex-item-auto">
                     <h4>Vs. Terran</h4>
@@ -144,25 +130,68 @@
                             <button class="nes-btn is-disabled" th:if="${laneItem.cells['TERRAN'].disabled}"></button>
                             <a th:href="@{edit-game-record(gameRecordId=${laneItem.gameRecord.id})}">
                                 <button class="nes-btn" th:if="${ ! laneItem.cells['TERRAN'].disabled}"
-                                        th:classappend="${laneItem.cells['TERRAN'].victory ? 'is-success' : 'is-error'}"></button>
+                                        th:classappend="${laneItem.cells['TERRAN'].victory ? 'is-success' : 'is-error'}"
+                                        onmouseout="outGameButton()"
+                                        th:onmouseover="overGameButton([[${laneItem.gameRecord.gameDateTime}]],
+                                            [[${laneItem.gameRecord.opponent.nickname}]],
+                                            [[${laneItem.gameRecord.opponentRace}]],
+                                            [[${laneItem.gameRecord.outcome}]])"></button>
                             </a>
                         </div>
                         <div>
                             <button class="nes-btn is-disabled" th:if="${laneItem.cells['ZERG'].disabled}"></button>
                             <a th:href="@{edit-game-record(gameRecordId=${laneItem.gameRecord.id})}">
                                 <button class="nes-btn" th:if="${ ! laneItem.cells['ZERG'].disabled}"
-                                        th:classappend="${laneItem.cells['ZERG'].victory ? 'is-success' : 'is-error'}"></button>
+                                        th:classappend="${laneItem.cells['ZERG'].victory ? 'is-success' : 'is-error'}"
+                                        onmouseout="outGameButton()"
+                                        th:onmouseover="overGameButton([[${laneItem.gameRecord.gameDateTime}]],
+                                            [[${laneItem.gameRecord.opponent.nickname}]],
+                                            [[${laneItem.gameRecord.opponentRace}]],
+                                            [[${laneItem.gameRecord.outcome}]])">
+
+                                </button>
                             </a>
                         </div>
                         <div>
                             <button class="nes-btn is-disabled" th:if="${laneItem.cells['PROTOSS'].disabled}"></button>
                             <a th:href="@{edit-game-record(gameRecordId=${laneItem.gameRecord.id})}">
                                 <button class="nes-btn" th:if="${ ! laneItem.cells['PROTOSS'].disabled}"
-                                        th:classappend="${laneItem.cells['PROTOSS'].victory ? 'is-success' : 'is-error'}"></button>
+                                        th:classappend="${laneItem.cells['PROTOSS'].victory ? 'is-success' : 'is-error'}"
+                                        onmouseout="outGameButton()"
+                                        th:onmouseover="overGameButton([[${laneItem.gameRecord.gameDateTime}]],
+                                            [[${laneItem.gameRecord.opponent.nickname}]],
+                                            [[${laneItem.gameRecord.opponentRace}]],
+                                            [[${laneItem.gameRecord.outcome}]])"></button>
                             </a>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="hoverdGameDEtailsSection" class="item sc2-flex-container" style="margin-top: 2em;">
+                <section class="nes-container with-title">
+                    <h3 class="title" style="color: lightblue;">Game details</h3>
+                    <div class="nes-table-responsive">
+                        <table class="nes-table is-bordered is-centered is-dark sc2-table-dark">
+                            <thead>
+                                <tr>
+                                    <th>When</th>
+                                    <th>Against</th>
+                                    <th>Race</th>
+                                    <th>Outcome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="detailsWhen">-</td>
+                                    <td id="detailsAgainst">-</td>
+                                    <td id="detailsRace">-</td>
+                                    <td id="detailsOutcome">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </div>
 
             <div class="flex-container" style="margin-top: 20px">
@@ -177,12 +206,23 @@
 </div>
 
 <script type="text/javascript">
-        function overGameButton(){
 
+        function overGameButton(when, against, race, outcome){
+
+            console.log('params: ' ,when, against, race, outcome);
+
+            $('#detailsWhen').html(when);
+            $('#detailsAgainst').html(against);
+            $('#detailsRace').html(race);
+            $('#detailsOutcome').html(outcome);
         }
 
-
-
+        function outGameButton(){
+            $('#detailsWhen').html('-');
+            $('#detailsAgainst').html('-');
+            $('#detailsRace').html('-');
+            $('#detailsOutcome').html('-');
+        }
 </script>
 
 </body>
